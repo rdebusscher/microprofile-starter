@@ -45,7 +45,7 @@
         <div class="header-title header-text-2">Microprofile Starter <span
                 class="header-yellow">"Beta"</span></div>
         <div class="header-title header-text-1 header-yellow">Generate MicroProfile Maven Project with Examples</div>
-        <a href="" class="feedback">
+        <a href="https://github.com/eclipse/microprofile-starter/issues" class="feedback">
             <span class="ui-button-text ui-c">Give Feedback</span>
         </a>
         <a href="https://microprofile.io" class="logo">
@@ -68,12 +68,12 @@
 
                     <p:panelGrid columns="2" columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
                                  styleClass="ui-panelgrid-blank ui-fluid">
-                        <p:inputText id="groupId" value="#{generatorDataBean.mavenData.groupId}" required="true"
+                        <p:inputText id="groupId" value="#{generatorDataBean.engineData.mavenData.groupId}" required="true"
                                      title="Used as part of the package name so it must comply with the Java rules">
                             <f:validator validatorId="packageNameValidator"/>
                         </p:inputText>
 
-                        <p:inputText id="artifactId" value="#{generatorDataBean.mavenData.artifactId}" required="true"
+                        <p:inputText id="artifactId" value="#{generatorDataBean.engineData.mavenData.artifactId}" required="true"
                                      title="Used as part of the package name so it must comply with the Java rules">
                             <f:validator validatorId="packageNameValidator"/>
                         </p:inputText></p:panelGrid>
@@ -86,13 +86,13 @@
 
                     <p:panelGrid columns="2" columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
                                  styleClass="ui-panelgrid-blank ui-fluid">
-                        <p:selectOneMenu id="mpVersion" value="#{generatorDataBean.mpVersion}"
+                        <p:selectOneMenu id="mpVersion" value="#{generatorDataBean.engineData.mpVersion}"
                                          required="true">
                             <f:selectItems value="${dataBean.mpItems}"/>
                             <p:ajax listener="#{generatorDataBean.onMPVersionSelected}" update="options"/>
                         </p:selectOneMenu>
 
-                        <p:selectOneMenu id="javaSEVersion" value="#{generatorDataBean.javaSEVersion}"
+                        <p:selectOneMenu id="javaSEVersion" value="#{generatorDataBean.engineData.javaSEVersion}"
                                          disabled="true">
                             <f:selectItems value="${dataBean.javaSEItems}"/>
                         </p:selectOneMenu>
@@ -109,15 +109,14 @@
                                          styleClass="ui-panelgrid-blank ui-fluid nested">
                                 <p:outputLabel value="MicroProfile Server" for="supportedServer"/>
 
-                                <p:selectOneMenu id="supportedServer" value="#{generatorDataBean.supportedServer}"
+                                <p:selectOneMenu id="supportedServer" value="#{generatorDataBean.engineData.supportedServer}"
                                                  required="true"
-                                                 disabled="#{empty generatorDataBean.mpVersion}">
+                                                 disabled="#{empty generatorDataBean.engineData.mpVersion}">
                                     <f:selectItem/>
                                     <f:selectItems value="${generatorDataBean.supportedServerItems}"/>
-                                    <p:ajax listener="#{generatorDataBean.onMPServerSelected}" update="options"/>
                                 </p:selectOneMenu>
                                 <p:outputLabel value="beans.xml" for="beansxmlFile"/>
-                                <p:selectOneMenu id="beansxmlFile" value="#{generatorDataBean.beansxmlMode}"
+                                <p:selectOneMenu id="beansxmlFile" value="#{generatorDataBean.engineData.beansxmlMode}"
                                                  required="true">
                                     <f:selectItems value="${dataBean.beansxmlItems}"/>
                                 </p:selectOneMenu>
@@ -126,7 +125,7 @@
                                 <p:outputLabel value="Examples for specifications" for="microprofileSpecs"/>
                                 <p:selectManyCheckbox id="microprofileSpecs" value="#{generatorDataBean.selectedSpecs}"
                                                       layout="responsive" styleClass="specifications"
-                                                      columns="2" disabled="#{empty generatorDataBean.mpVersion}">
+                                                      columns="2" disabled="#{empty generatorDataBean.engineData.mpVersion}">
                                     <f:selectItems value="#{generatorDataBean.specs}" var="spec" itemLabel="#{spec}"
                                                    itemValue="#{spec}"/>
                                 </p:selectManyCheckbox>
